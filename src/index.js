@@ -12,9 +12,11 @@ app.get('/', (res, req) => {
 })
 const authController = require('./auth/auth.controller')
 const itemController = require('./item/item.controller')
+const userController = require('./user/user.controller')
 
 app.use('/api/auth', authController)
 app.use('/api/items', itemController)
+app.use('/api/user', userController)
 
 app.listen(PORT, () => {
     console.log('server berjalan' + PORT)
