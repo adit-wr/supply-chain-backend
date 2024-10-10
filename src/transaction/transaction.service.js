@@ -20,19 +20,19 @@ async function getAllTransactionById(transactionId) {
 }
 async function verifyTransaction(transactionId, status) {
     const transaction = await transactionRepository.findTransactionById(transactionId)
-    if(!transaction) {
+    if (!transaction) {
         throw new Error('transaction not fuond')
     }
     await transactionRepository.updateTransactionStatus(transactionId, status, status === 'BORROWED' ? 'borrowedAt' : null)
 
-    if(status === 'BORROWED') {
+    if (status === 'BORROWED') {
         const item = await itemRepository.findItemById(transaction.itemId)
-        if(!item) {
+        if (!item) {
             throw new Error('item not found')
         }
 
         const newQuantity = item.quantity - transaction.quantityBorrowed
-        if(newQuantity < 0) {
+        if (newQuantity < 0) {
             throw new Error('insufficent quantity')
         }
         await itemRepository.updateItemQuantity(item.id, newQuantity)
@@ -41,10 +41,10 @@ async function verifyTransaction(transactionId, status) {
 
 async function returnItem(transactionId) {
     const transaction = await transactionRepository.findTransactionById(transactionId)
-    if(!transaction){
+    if (!transaction) {
         throw new Error('transaction not found')
     }
-    if(transaction.status !== 'BORROWED') {
+    if (transaction.status !== 'BORROWED') {
         throw new Error('cannot return item, transaction status is borrowed')
     }
     await transactionRepository.updateTransactionStatus(transactionId, "RETURNED", "returnedAt")

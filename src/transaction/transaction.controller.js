@@ -44,16 +44,16 @@ router.patch('/verify/:transactionId', async (req, res) => {
 
 router.post('/return/:transactionId', async (req, res) => {
     try {
-        const {transactionId} = req.params
-        const {userId} = req.body
+        const { transactionId } = req.params
+        const { userId } = req.body
 
         const transaction = await transactionService.getAllTransactionById(transactionId)
 
-        if(transaction.userId !== userId) {
-            return res.status(403).json({message: "unauthorized"})
+        if (transaction.userId !== userId) {
+            return res.status(403).json({ message: "unauthorized" })
         }
         await transactionService.returnItem(transactionId)
-        res.status(200).json({message: 'item returned'})
+        res.status(200).json({ message: 'item returned' })
     } catch (error) {
         console.log(error)
         res.status(400).send(error.message)

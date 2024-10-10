@@ -8,7 +8,7 @@ async function insertItem(itemData) {
             quantity: itemData.quantity
         }
     });
-    return newItem;    
+    return newItem;
 }
 
 async function findItems() {

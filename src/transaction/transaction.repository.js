@@ -75,7 +75,7 @@ async function updateTransactionStatus(transactionId, status, timeStampField) {
             status,
         }
 
-        if(timeStampField) {
+        if (timeStampField) {
             updateData[timeStampField] = new Date()
         }
 
