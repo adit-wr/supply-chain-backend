@@ -47,10 +47,22 @@ async function deleteItem(id) {
     })
 }
 
+async function updateItemQuantity(itemId, newQuantity) {
+    await prisma.item.update({
+        where: {
+            id: parseInt(itemId),
+        },
+        data: {
+            quantity: newQuantity,
+        }
+    })
+}
+
 module.exports = {
     insertItem,
     findItems,
     findItemById,
     editItem,
-    deleteItem
+    deleteItem,
+    updateItemQuantity
 }
