@@ -59,7 +59,7 @@ async function findTransactionById(transactionId) {
     try {
         const transaction = await prisma.transaction.findUnique({
             where: {
-                id: 1,
+                id: parseInt(transactionId),
             }
         })
         return transaction
