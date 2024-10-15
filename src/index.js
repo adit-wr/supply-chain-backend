@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
+const adminAuthorization = require('./middleware/adminAuthorization')
 dotenv.config()
 const PORT = process.env.PORT
 
@@ -17,7 +18,7 @@ const transactionController = require('./transaction/transaction.controller')
 
 app.use('/api/auth', authController)
 app.use('/api/items', itemController)
-app.use('/api/user', userController)
+app.use('/api/user', adminAuthorization, userController)
 app.use('/api/transaction', transactionController)
 
 app.listen(PORT, () => {

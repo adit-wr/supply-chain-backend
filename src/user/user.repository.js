@@ -5,7 +5,7 @@ const insertUser = async (userData) => {
         data: {
             username: userData.username,
             email: userData.email,
-            password: userData.password
+            password: userData.password,
         }
     })
     return newUser
